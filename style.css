@@ -1,0 +1,598 @@
+/* Reset basic styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+body {
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Simulasi Layar HP */
+.app-container {
+    width: 390px;
+    height: 844px;
+    background-color: #FFFFFF; 
+    border: 8px solid #222;
+    border-radius: 40px;
+    position: relative;
+    overflow-y: auto;
+    padding-bottom: 80px;
+}
+
+/* 1. Search Bar */
+.search-container {
+    padding: 20px 15px 10px 15px;
+}
+.search-box {
+    background: white;
+    border: 2px solid #0F2E15;
+    border-radius: 15px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.search-icon { color: #0F2E15; font-size: 18px; }
+.search-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+    color: #999;
+}
+
+/* 2. Welcome Banner */
+.welcome-banner {
+    background-color: #0F2E15;
+    padding: 30px 20px;
+    margin-top: 5px;
+    border-radius: 0 0 10px 10px;
+}
+.welcome-banner h1 {
+    color: #E3EED4;
+    font-size: 32px;
+    font-weight: 600;
+    /* text-decoration: underline; */
+    letter-spacing: 1px;
+}
+
+/* 3. Grid Menu */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 20px 15px;
+}
+.menu-card {
+    border: 3px solid transparent;
+    border-radius: 15px;
+    padding: 15px;
+    cursor: pointer;
+    transition: transform 0.2s;
+
+    background-image:
+        linear-gradient(#E3EED4, #E3EED4),
+        linear-gradient(30deg, #6B9071, #E3EED4);
+        
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+.menu-card:active { transform: scale(0.95); }
+.icon-box {
+    background-color: #6B9071;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0F2E15;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+.menu-card h3 {
+    font-size: 14px;
+    color: #0F2E15;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+.menu-card p {
+    font-size: 10px;
+    color: #6B9071;
+}
+
+/* 4. Bottom Navigation */
+.bottom-nav {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    background-color: #FFFDF6;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #CCC;
+    cursor: pointer;
+    font-size: 18px;
+}
+.nav-item span {
+    font-size: 9px;
+    margin-top: 4px;
+    font-weight: bold;
+}
+.nav-item.active {
+    color: #0F2E15;
+}
+
+/* 5. Profit Statistics */
+.stats-container {
+    padding: 10px 15px 20px 15px;
+}
+
+.stats-container h2 {
+    font-size: 18px;
+    color: #0F2E15;
+    font-weight: 700;
+    margin-bottom: 5px;
+    letter-spacing: 0.5px;
+}
+
+.chart-box {
+    border: 2px solid #0F2E15;
+    border-radius: 15px;
+    padding: 15px;
+    background-color: white;
+    display: flex;
+    height: 240px;
+    gap: 8px;
+}
+
+.y-axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 35px;
+    font-size: 11px;
+    color: #0F2E15;
+    font-weight: 600;
+    padding-bottom: 20px;
+}
+
+.chart-area {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+    align-items: flex-end;
+    border-left: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
+    padding-left: 5px;
+    position: relative;
+}
+
+.bar-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    width: 30px;
+}
+
+/* Batang Grafiknya */
+.bar {
+    width: 100%;
+    background-color: #6B9071;
+    border-radius: 5px 5px 0 0;
+    transition: height 0.5s ease-in-out;
+}
+
+/* Label xxxx di bawah batang */
+.bar-label {
+    font-size: 10px;
+    color: #666;
+    margin-top: 10px;
+    position: absolute;
+    bottom: -15px;
+}
+
+
+
+/*INVENTORY
+/* Trik Mekanisme Pindah Halaman */
+.app-page {
+    display: block;
+}
+.app-page.hidden {
+    display: none;
+}
+
+/* Header Inventory */
+.inventory-header {
+    padding: 30px 20px 10px 20px;
+}
+.inventory-header h2 {
+    font-size: 24px;
+    color: #0F2E15;
+    font-weight: 700;
+}
+.inventory-header p {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+}
+
+/* Input Code/Name */
+.inventory-search {
+    padding: 0 20px;
+    margin-top: 15px;
+}
+.inventory-search input {
+    width: 100%;
+    border: 2px solid #0F2E15;
+    border-radius: 12px;
+    padding: 12px 15px;
+    font-size: 13px;
+    outline: none;
+    background-color: white;
+}
+
+/* Banner Scan */
+.scan-banner {
+    background-color: #E3EED4;
+    border: 2px solid #6B9071;
+    border-radius: 15px;
+    margin: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+}
+.scan-icon-inside {
+    font-size: 24px;
+    color: #0F2E15;
+}
+.scan-banner span {
+    font-size: 11px;
+    color: #0F2E15;
+    font-weight: 600;
+}
+
+/* List Produk */
+.products-list {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.product-item {
+    background-color: #E3EED4;
+    border: 2px solid #6B9071;
+    border-radius: 15px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+}
+.product-box-img {
+    width: 50px;
+    height: 50px;
+    background-color: #6B9071;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+}
+.product-info h4 {
+    font-size: 16px;
+    color: #0F2E15;
+    margin-bottom: 5px;
+}
+.badge-save {
+    font-size: 9px;
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #E3EED4;
+}
+.badge-no {
+    font-size: 9px;
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    color:#0F2E15;
+}
+.badge-save { background-color: #0F2E15; }
+
+/* Tombol Edit di kanan */
+.btn-edit {
+    position: absolute;
+    right: 15px;
+    background: none;
+    border: 1px solid #0F2E15;
+    border-radius: 6px;
+    padding: 6px 8px;
+    cursor: pointer;
+    color: #0F2E15;
+    font-size: 14px;
+}
+
+/* Sifat teks rata tengah */
+.text-center { text-align: center; }
+
+/* CSS Halaman Scan */
+.scan-area-box {
+    background-color: #E3EED4;
+    margin: 15px;
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.scan-square {
+    width: 45px; height: 45px;
+    border: 2px solid #0F2E15; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; font-size: 20px;
+}
+.scan-line-placeholder {
+    height: 12px; width: 60%; background-color: #6B9071; border-radius: 6px;
+}
+.scan-main-section { padding: 15px; }
+.scan-main-section h3 { font-size: 16px; margin-bottom: 10px; color: #0F2E15; }
+.scan-big-target {
+    background-color: #E3EED4;
+    border: 2px solid #6B9071; border-radius: 20px;
+    height: 180px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.scan-big-target p { font-size: 16px; font-weight: bold; color: #0F2E15; }
+.scan-big-target small { font-size: 10px; color: #666; }
+
+/* CSS Halaman Statis / Bookkeeping */
+.time-filter-row {
+    display: flex; justify-content: space-around; padding: 15px;
+}
+.btn-filter {
+    background-color: #6B9071; border: none; color: white;
+    padding: 6px 14px; border-radius: 8px; font-size: 11px; cursor: pointer;
+}
+.btn-filter.active { background-color: #0F2E15; }
+.revenue-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 0 15px;
+}
+.revenue-card {
+    background: white; border: 2px solid #6B9071; border-radius: 12px; padding: 12px;
+}
+.revenue-card span { font-size: 10px; color: #6B9071; font-weight: bold; display: flex; justify-content: space-between; }
+.revenue-card h2 { font-size: 14px; color: #0F2E15; margin-top: 5px; }
+
+/* CSS Halaman Profile */
+.profile-header-card {
+    background-color: #0F2E15; margin: 15px; padding: 20px; border-radius: 20px; color: white;
+    position: relative;
+}
+.avatar-circle {
+    width: 65px; height: 65px; background: white; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 10px;
+}
+.profile-meta h2 { font-size: 20px; }
+.profile-meta p { font-size: 12px; color: #6B9071; }
+.line-deco { width: 80px; height: 4px; background-color: #6B9071; margin: 8px 0; }
+.profile-contacts { margin-top: 15px; font-size: 11px; display: flex; flex-direction: column; gap: 5px; }
+
+.action-btn-row { display: flex; justify-content: space-around; padding: 0 15px; margin-top: 10px; }
+.btn-action {
+    background-color: #E3EED4; border: 2px solid #6B9071; border-radius: 8px;
+    padding: 8px 12px; font-size: 12px; color: #0F2E15; font-weight: bold; cursor: pointer;
+}
+.settings-list { padding: 15px; display: flex; flex-direction: column; gap: 10px; }
+.settings-item {
+    background-color: #E3EED4; border-radius: 12px; padding: 12px 15px;
+    display: flex; justify-content: space-between; align-items: center;
+}
+.sett-left { display: flex; align-items: center; gap: 12px; color: #0F2E15; font-size: 14px; }
+.sett-left i { background-color: #6B9071; padding: 6px; border-radius: 6px; color: #0F2E15; }
+.arrow-r { color: #0F2E15; font-size: 12px; }
+
+/* CONTAINER UTAMA BOX GRAFIK */
+.stats-container-statis {
+    margin: 20px 15px;
+    padding: 15px;
+    background-color: #E3EED4;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+
+/* JUDUL SALES STATISTICS */
+.stats-container-statis h2 {
+    font-size: 16px;
+    color: #0F2E15;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+/* WRAPPER COORD CHART (Angka + Grafik) */
+.line-chart-box {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+}
+
+/* PERBAIKAN GRAFIK JURUS FIX */
+.stats-container-statis {
+    background-color: #E3EED4 !important;
+    padding: 15px !important;
+    border-radius: 15px !important;
+    margin: 20px 15px !important;
+}
+
+.line-chart-box {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 12px !important;
+    align-items: stretch !important;
+}
+
+.y-axis-statis {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: flex-end !important;
+    width: 35px !important;
+    height: 150px !important; /* Samakan presisi dengan tinggi SVG */
+    font-size: 11px !important;
+    color: #112613 !important;
+    font-weight: bold !important;
+    padding-bottom: 5px !important;
+    box-sizing: border-box !important;
+}
+
+.chart-svg-area {
+    flex: 1 !important;
+}
+
+/* AREA TEMPAT SVG & SUMBU X */
+.chart-svg-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* GRAPHIC SVG NYA DIBIKIN RESPONSIVE */
+.chart-svg-area svg {
+    width: 100%;
+    height: 140px;
+    background: transparent;
+    display: block;
+}
+
+/* LABEL SUMBU X (xxxx DI BAWAH) */
+.x-axis-statis {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 5px;
+    padding: 0 2px;
+    box-sizing: border-box;
+}
+
+.x-axis-statis span {
+    font-size: 11px;
+    color: #0F2E15;
+    font-weight: bold;
+    text-align: center;
+    flex: 1;
+}
+
+/* STYLING MODAL DATA */
+.modal {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+}
+.modal.hidden { 
+    display: none !important; 
+}
+.modal-content {
+    background-color: white; padding: 20px; border-radius: 15px;
+    width: 85%; max-width: 320px; border: 2px solid #112613;
+}
+.modal-content h3 { color: #112613; font-size: 16px; margin-bottom: 5px; }
+.form-group { margin-bottom: 12px; display: flex; flex-direction: column; gap: 5px; }
+.form-group label { font-size: 12px; color: #112613; font-weight: bold; }
+.form-group input, .form-group select {
+    padding: 8px; border: 1px solid #6B9071; border-radius: 6px; font-family: inherit;
+}
+.modal-buttons { display: flex; gap: 10px; margin-top: 15px; }
+.btn-batal {
+    flex: 1; background: #eee; border: none; padding: 8px; border-radius: 6px; cursor: pointer; color: #333;
+}
+.btn-simpan {
+    flex: 1; background: #112613; color: white; border: none; padding: 8px; border-radius: 6px; cursor: pointer;
+}
+
+#page-scan, #page-statis {
+    padding-top: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+#page-scan .welcome-banner, 
+#page-statis .welcome-banner {
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    border-top-left-radius: 0 !important; 
+    border-top-right-radius: 0 !important;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Biar konten di bawah banner tetep punya jarak aman dari pinggir layar */
+#page-scan .scan-area-box,
+#page-scan .scan-main-section,
+#page-statis .time-filter-row,
+#page-statis .revenue-grid,
+#page-statis .stats-container-statis {
+    margin-left: 15px !important;
+    margin-right: 15px !important;
+}
+
+/* Membuat Avatar dan Teks Nama sejajar ke samping */
+.profile-main-info {
+    display: flex;
+    align-items: center; 
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+/* Mengatur ulang teks nama dan username agar rapi */
+.profile-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.profile-meta h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #FFFFFF; 
+    font-weight: 700;
+}
+
+.profile-meta p {
+    margin: 0;
+    font-size: 13px;
+    color: #6B9071; 
+}
+
+/* Merapikan garis dekorasi agar melintang penuh di bawahnya */
+.line-deco {
+    width: 100%;
+    height: 3px;
+    background-color: #6B9071;
+    margin-bottom: 15px;
+    border-radius: 2px;
+}
+

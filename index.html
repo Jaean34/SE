@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMKM Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="app-container">
+
+        <div id="page-home" class="app-page">
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fa-solid fa-circle-notch search-icon"></i>
+                    <input type="text" placeholder="Search here...">
+                </div>
+            </div>
+
+            <div class="welcome-banner">
+                <h1>WELCOME!</h1>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-card" onclick="navigasi('statis')">
+                    <div class="icon-box"><i class="fa-solid fa-dollar-sign"></i></div>
+                    <h3>TOTAL SALES</h3>
+                    <p>View total sales</p>
+                </div>
+                <div class="menu-card" onclick="navigasi('list')">
+                    <div class="icon-box"><i class="fa-solid fa-box"></i></div>
+                    <h3>INVENTORY</h3>
+                    <p>View remaining inventory</p>
+                </div>
+                <div class="menu-card" onclick="navigasi('scan')">
+                    <div class="icon-box"><i class="fa-solid fa-basket-shopping"></i></div>
+                    <h3>CART</h3>
+                    <p>View your cart here!</p>
+                </div>
+                <div class="menu-card" onclick="navigasi('profile')">
+                    <div class="icon-box"><i class="fa-solid fa-users"></i></div>
+                    <h3>PROFILE</h3>
+                    <p>View your profile here!</p>
+                </div>
+            </div>
+
+            <div class="stats-container">
+                <h2>PROFIT STATISTICS</h2>
+                <div class="chart-box">
+                    <div class="y-axis">
+                        <span>8000</span>
+                        <span>6000</span>
+                        <span>4000</span>
+                        <span>2000</span>
+                        <span>0</span>
+                    </div>
+                    <div class="chart-area">
+                        <div class="bar-wrapper"><div class="bar" style="height: 35%;"></div><span class="bar-label">xxxx</span></div>
+                        <div class="bar-wrapper"><div class="bar" style="height: 65%;"></div><span class="bar-label">xxxx</span></div>
+                        <div class="bar-wrapper"><div class="bar" style="height: 50%;"></div><span class="bar-label">xxxx</span></div>
+                        <div class="bar-wrapper"><div class="bar" style="height: 70%;"></div><span class="bar-label">xxxx</span></div>
+                        <div class="bar-wrapper"><div class="bar" style="height: 100%;"></div><span class="bar-label">xxxx</span></div>
+                        <div class="bar-wrapper"><div class="bar" style="height: 60%;"></div><span class="bar-label">xxxx</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-list" class="app-page hidden">
+            <div class="inventory-header">
+                <h2>INVENTORY</h2>
+                <p>Manage and monitor product inventory</p>
+            </div>
+            <div class="inventory-search">
+                <input type="text" placeholder="Enter the item code or name">
+            </div>
+            <div class="scan-banner" onclick="navigasi('scan')">
+                <div class="scan-icon-inside"><i class="fa-solid fa-expand"></i></div>
+                <span>Scan to manage and add to product inventory</span>
+            </div>
+            <div class="products-list">
+                <div class="product-item">
+                    <div class="product-box-img"><i class="fa-solid fa-image"></i></div>
+                    <div class="product-info">
+                        <h4>Product 1</h4>
+                        <span class="badge-save">Save</span> <span class="badge-no">No</span>
+                    </div>
+                    <button class="btn-edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                </div>
+                <div class="product-item">
+                    <div class="product-box-img"><i class="fa-solid fa-image"></i></div>
+                    <div class="product-info">
+                        <h4>Product 2</h4>
+                        <span class="badge-save">Save</span> <span class="badge-no">No</span>
+                    </div>
+                    <button class="btn-edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-scan" class="app-page hidden">
+            <div class="welcome-banner text-center">
+                <h1>TRANSACTIONS</h1>
+                <p style="color: #6B9071; font-size: 12px; margin-top: 5px;">View and process sales transactions</p>
+            </div>
+            <div class="scan-area-box">
+                <div class="scan-square"><i class="fa-solid fa-expand"></i></div>
+                <div class="scan-line-placeholder"></div>
+            </div>
+
+            
+            <div class="scan-main-section">
+                <h3>SCAN</h3>
+                <div class="scan-big-target">
+                    <i class="fa-solid fa-qrcode" style="font-size: 40px; color: #0F2E15; margin-bottom: 10px;"></i>
+                    <p>Scan here</p>
+                    <small>Manage & Add to Product Inventory</small>
+                </div>
+            </div>
+        </div>
+        <div id="page-statis" class="app-page hidden">
+            <div class="welcome-banner text-center">
+                <h1>BOOKKEEPING</h1>
+                <p style="color: #6B9071; font-size: 12px; margin-top: 5px;">View sales reports</p>
+            </div>
+            
+            <div class="time-filter-row">
+                <button class="btn-filter active">Today</button>
+                <button class="btn-filter">Week 1</button>
+                <button class="btn-filter">Month 1</button>
+                <button class="btn-filter">Year 1</button>
+            </div>
+            
+            <div class="revenue-grid">
+                <div class="revenue-card">
+                    <span>MONTHLY REVENUE <i class="fa-solid fa-arrow-trend-up"></i></span>
+                    <h2>Rp 12,500,000</h2>
+                </div>
+                <div class="revenue-card">
+                    <span>GROSS PROFIT <i class="fa-solid fa-arrow-trend-up"></i></span>
+                    <h2>Rp 4,200,000</h2>
+                </div>
+            </div>
+
+            <div class="stats-container-statis">
+                <h2>SALES STATISTICS</h2>
+                
+                <div class="line-chart-box">
+                    <div class="y-axis-statis">
+                        <span>280</span>
+                        <span>210</span>
+                        <span>140</span>
+                        <span>70</span>
+                        <span>0</span>
+                    </div>
+
+                    <div class="chart-svg-area">
+                        <svg viewBox="0 0 300 150" preserveAspectRatio="none">
+                            <line x1="0" y1="0" x2="300" y2="0" stroke="#112613" stroke-width="1" opacity="0.3" />
+                            <line x1="0" y1="37.5" x2="300" y2="37.5" stroke="#112613" stroke-width="1" opacity="0.3" />
+                            <line x1="0" y1="75" x2="300" y2="75" stroke="#112613" stroke-width="1" opacity="0.3" />
+                            <line x1="0" y1="112.5" x2="300" y2="112.5" stroke="#112613" stroke-width="1" opacity="0.3" />
+                            <line x1="0" y1="150" x2="300" y2="150" stroke="#112613" stroke-width="1" />
+
+                            <line x1="0" y1="0" x2="0" y2="150" stroke="#112613" stroke-width="1" />
+                            <line x1="60" y1="0" x2="60" y2="150" stroke="#112613" stroke-width="1" opacity="0.3" />
+                            <line x1="120" y1="0" x2="120" y2="150" stroke="#112613" stroke-width="1" opacity="0.3" />
+                            <line x1="180" y1="0" x2="180" y2="150" stroke="#112613" stroke-width="1" opacity="0.3" />
+                            <line x1="240" y1="0" x2="240" y2="150" stroke="#112613" stroke-width="1" opacity="0.3" />
+                            <line x1="300" y1="0" x2="300" y2="150" stroke="#112613" stroke-width="1" />
+
+                            <polyline fill="none" stroke="#112613" stroke-width="3" 
+                                points="0,112.5 60,75 120,55 180,65 240,30 300,15" />
+
+                            <circle cx="0" cy="112.5" r="5" fill="#112613" />
+                            <circle cx="60" cy="75" r="5" fill="#112613" />
+                            <circle cx="120" cy="55" r="5" fill="#112613" />
+                            <circle cx="180" cy="65" r="5" fill="#112613" />
+                            <circle cx="240" cy="30" r="5" fill="#112613" />
+                            <circle cx="300" cy="15" r="5" fill="#112613" />
+                        </svg>
+
+                        <div class="x-axis-statis">
+                            <span>xxxx</span>
+                            <span>xxxx</span>
+                            <span>xxxx</span>
+                            <span>xxxx</span>
+                            <span>xxxx</span>
+                            <span>xxxx</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       <div id="page-profile" class="app-page hidden">
+            <div class="profile-header-card">
+                <div class="profile-main-info">
+                    <div class="avatar-circle">
+                        <i class="fa-solid fa-user" style="font-size: 40px; color: #0F2E15;"></i>
+                    </div>
+                    <div class="profile-meta">
+                        <h2>NAME</h2>
+                        <p>@username</p>
+                    </div>
+                </div>
+                <div class="line-deco"></div>
+                
+                <div class="profile-contacts">
+                    <p><i class="fa-solid fa-envelope"></i> user@gmail.com</p>
+                    <p><i class="fa-solid fa-phone"></i> +00 0000-0000-000</p>
+                </div>
+            </div>
+            <div class="action-btn-row">
+                <button class="btn-action" onclick="bukaModal()">Add Stock</button>
+                <button class="btn-action">Products</button>
+                <button class="btn-action">Remove Stock</button>
+            </div>
+            <div class="settings-list">
+                <div class="settings-item"><div class="sett-left"><i class="fa-solid fa-shop"></i> <span>Market</span></div><i class="fa-solid fa-chevron-right arrow-r"></i></div>
+                <div class="settings-item"><div class="sett-left"><i class="fa-solid fa-bell"></i> <span>Notification</span></div><i class="fa-solid fa-chevron-right arrow-r"></i></div>
+                <div class="settings-item"><div class="sett-left"><i class="fa-solid fa-shield-halved"></i> <span>Security</span></div><i class="fa-solid fa-chevron-right arrow-r"></i></div>
+                <div class="settings-item"><div class="sett-left"><i class="fa-solid fa-gear"></i> <span>Settings</span></div><i class="fa-solid fa-chevron-right arrow-r"></i></div>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <div class="nav-item active" onclick="navigasi('home')"><i class="fa-solid fa-house"></i><span>HOME</span></div>
+            <div class="nav-item" onclick="navigasi('list')"><i class="fa-solid fa-box"></i><span>INVENTORY</span></div>
+            <div class="nav-item" onclick="navigasi('scan')"><i class="fa-solid fa-cart-shopping"></i><span>CART</span></div>
+            <div class="nav-item" onclick="navigasi('statis')"><i class="fa-solid fa-book"></i><span>BOOKKEEPING</span></div>
+            <div class="nav-item" onclick="navigasi('profile')"><i class="fa-solid fa-user"></i><span>PROFILE</span></div>
+        </div>
+
+    </div> <script src="app.js"></script>
+
+    <div id="modal-produk" class="modal hidden">
+        <div class="modal-content">
+            <h3>New Product tray</h3>
+            <hr style="border: 1px solid #6B9071; margin-bottom: 15px;">
+            <form id="form-produk">
+                <div class="form-group">
+                    <label>Product Name</label>
+                    <input type="text" id="input-nama" placeholder="Contoh: Kopi Susu Gula Aren" required>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="input-save">
+                        <option value="Save">Save</option>
+                        <option value="Draft">Draft</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Availability Status</label>
+                    <select id="input-no">
+                        <option value="Yes">Yes (Available)</option>
+                        <option value="No">No (Out of Stock)</option>
+                    </select>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-batal" onclick="tutupModal()">Cancel</button>
+                    <button type="submit" class="btn-simpan">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-pilihan" class="modal hidden">
+        <div class="modal-content text-center" style="max-width: 280px;">
+            <h3 id="pilihan-judul-produk" style="margin-bottom: 15px;">Kelola Produk</h3>
+            <button class="btn-simpan" id="btn-pilihan-edit" style="width: 100%; margin-bottom: 10px; background: #6B9071;">
+                <i class="fa-solid fa-pen-to-square"></i> Edit Produk
+            </button>
+            <button class="btn-simpan" id="btn-pilihan-hapus" style="width: 100%; background: #bd3a3a;">
+                <i class="fa-solid fa-trash"></i> Hapus Produk
+            </button>
+            <button class="btn-batal" onclick="tutupModalPilihan()" style="width: 100%; margin-top: 15px;">Batal</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
