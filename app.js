@@ -8,7 +8,7 @@ if (!databaseProduk) {
     localStorage.setItem('produk_umkm', JSON.stringify(databaseProduk));
 }
 
-let idProdukTerpilih = null; // Menyimpan ID produk yang sedang dikelola
+let idProdukTerpilih = null; 
 
 // 2. Fungsi Navigasi Halaman SPA
 function navigasi(namaHalaman) {
@@ -57,7 +57,7 @@ function tampilkanDataInventory() {
     });
 }
 
-// 4. Fitur Klik Tombol Edit Bawaan: Muncul Menu Pilihan (Edit / Hapus)
+// 4. Modal Pilihan Urusan Edit / Hapus
 function bukaModalPilihan(id, nama) {
     idProdukTerpilih = id;
     document.getElementById('pilihan-judul-produk').innerText = nama;
@@ -68,21 +68,17 @@ function tutupModalPilihan() {
     document.getElementById('modal-pilihan').classList.add('hidden');
 }
 
-// Aksi jika memilih "Edit Produk"
 document.getElementById('btn-pilihan-edit').addEventListener('click', function() {
     const produk = databaseProduk.find(p => p.id === idProdukTerpilih);
     if (produk) {
-        // Isi formulir dengan data lama
         document.getElementById('input-nama').value = produk.nama;
         document.getElementById('input-save').value = produk.save;
         document.getElementById('input-no').value = produk.no;
-        
         tutupModalPilihan();
-        bukaModal(); // Buka form modal utama
+        bukaModal(); 
     }
 });
 
-// Aksi jika memilih "Hapus Produk"
 document.getElementById('btn-pilihan-hapus').addEventListener('click', function() {
     tutupModalPilihan();
     if (confirm("Apakah kamu yakin ingin menghapus produk ini?")) {
@@ -92,7 +88,6 @@ document.getElementById('btn-pilihan-hapus').addEventListener('click', function(
     }
 });
 
-// 5. Fungsi Kontrol Modal Tambah/Edit Produk Utama
 function bukaModal() {
     const modal = document.getElementById('modal-produk');
     if (modal) modal.classList.remove('hidden');
@@ -103,10 +98,10 @@ function tutupModal() {
     const form = document.getElementById('form-produk');
     if (modal) modal.classList.add('hidden');
     if (form) form.reset();
-    idProdukTerpilih = null; // Reset ID tersemat
+    idProdukTerpilih = null;
 }
 
-// 6. Hubungkan Aksi Submit Form (Bisa Tambah Baru ATAU Update Data Lama)
+// 5. Eksekusi Utama saat Aplikasi Terbuka (Anti-Double)
 window.onload = function() {
     tampilkanDataInventory();
     
@@ -120,7 +115,6 @@ window.onload = function() {
             const noVal = document.getElementById('input-no').value;
 
             if (idProdukTerpilih) {
-                // MODUS EDIT: Update data lama di dalam array
                 databaseProduk = databaseProduk.map(p => {
                     if (p.id === idProdukTerpilih) {
                         return { id: p.id, nama: namaVal, save: saveVal, no: noVal };
@@ -128,14 +122,15 @@ window.onload = function() {
                     return p;
                 });
             } else {
-                // MODUS TAMBAH BARU
                 const produkBaru = { id: Date.now(), nama: namaVal, save: saveVal, no: noVal };
                 databaseProduk.push(produkBaru);
             }
 
             localStorage.setItem('produk_umkm', JSON.stringify(databaseProduk));
+            
             tutupModal();
-            navigasi('list'); 
+            alert("🎉 Produk berhasil disimpan!");
+            navigasi('profile'); // Tetap stay aman di halaman Profile!
         });
     }
 };
