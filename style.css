@@ -13,21 +13,123 @@ body {
     padding: 20px;
 }
 
-/* Simulasi Layar HP */
+/* --- 1. KUNCI CONTAINER UTAMA --- */
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Mencegah layar browser utama melar ke bawah */
+    background-color: #f5f5f5; 
+}
+
+/* ==================== PERBAIKAN TOTAL SAKTI LOCK SCROLL ==================== */
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Mutlak mengunci layar browser utama */
+    background-color: #f5f5f5;
+}
+
+/* ==================== RACIKAN SAKTI FIXED SCREEN LAYOUT ==================== */
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Mengunci total layar browser utama agar tidak bounce */
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container utama bertindak sebagai jangkar flex vertikal */
 .app-container {
-    width: 390px;
-    height: 844px;
-    background-color: #FFFFFF; 
-    border: 8px solid #222;
-    border-radius: 40px;
+    width: 100%;
+    max-width: 450px;
+    height: 100vh;          /* Mengunci tinggi pas satu layar penuh */
+    margin: 0 auto;
     position: relative;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column; /* Menyusun konten atas dan nav bawah secara vertikal */
+    overflow: hidden;
+}
+
+/* Format Halaman SPA: Mengisi sisa ruang kosong secara otomatis */
+.app-page {
+    width: 100%;
+    flex: 1;                /* OTOMATIS mengambil sisa layar di atas bottom-nav */
+    display: flex !important;
+    flex-direction: column; /* Menyusun elemen di dalam page dari atas ke bawah */
+    overflow: hidden;       /* Matikan scroll halaman penuh */
+    padding: 0px 0px 75px 0px; /* Padding bawah 75px aman agar konten tidak terpotong nav bawah */
+    box-sizing: border-box;
+}
+
+/* Pastikan class hidden berfungsi memotong display flex */
+.app-page.hidden {
+    display: none !important;
+}
+
+/* --- KENDALI SCROLL KONTEN SPESIFIK --- */
+
+/* 1. Halaman Inventory: Kepala diam, list barang bebas gulir */
+.inventory-header, .inventory-search, .scan-banner {
+    flex-shrink: 0; /* Mencegah elemen atas menyusut/gepeng */
+}
+.products-list {
+    flex: 1;                /* Mengambil sisa ruang yang tersedia di halaman */
+    overflow-y: auto;       /* Mengaktifkan scroll hanya untuk daftar barang */
+    -webkit-overflow-scrolling: touch; /* Scroll smooth di iOS/HP */
+    padding-bottom: 10px;
+}
+
+/* 2. Halaman Cart (Transactions): Area scan diam, list keranjang belanja bebas gulir */
+.welcome-banner, .scan-area-box, .scan-main-section {
+    flex-shrink: 0;
+}
+#cart-list-container {
+    flex: 1;
     overflow-y: auto;
-    padding-bottom: 80px;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 3. Halaman Home & Bookkeeping (Mengizinkan scroll halaman jika konten meluber) */
+#page-home, #page-statis {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 4. Halaman Profile */
+.profile-header-card, .action-btn-row {
+    flex-shrink: 0;
+}
+.settings-list {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* --- SEMBUNYIKAN SCROLLBAR BAWAAN BROWSER AGAR RAPI --- */
+.products-list::-webkit-scrollbar,
+#cart-list-container::-webkit-scrollbar,
+.settings-list::-webkit-scrollbar,
+#page-home::-webkit-scrollbar,
+#page-statis::-webkit-scrollbar {
+    display: none;
+}
+
+.products-list, #cart-list-container, .settings-list, #page-home, #page-statis {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 /* 1. Search Bar */
 .search-container {
     padding: 20px 15px 10px 15px;
+    flex-shrink: 0 !important;
 }
 .search-box {
     background: white;
@@ -51,8 +153,11 @@ body {
 .welcome-banner {
     background-color: #0F2E15;
     padding: 30px 20px;
-    margin-top: 5px;
+    margin-top: 0;
+    width: 100%;
     border-radius: 0 0 10px 10px;
+    box-sizing: border-box;
+    flex-shrink: 0 !important;
 }
 .welcome-banner h1 {
     color: #E3EED4;
@@ -119,6 +224,7 @@ body {
     align-items: center;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
+    z-index: 999;
 }
 .nav-item {
     display: flex;
@@ -214,7 +320,13 @@ body {
 /*INVENTORY
 /* Trik Mekanisme Pindah Halaman */
 .app-page {
-    display: block;
+    width: 100%;
+    flex: 1; 
+    display: flex !important;
+    flex-direction: column;
+    overflow: hidden; 
+    padding-bottom: 0 0 75px 0; 
+    box-sizing: border-box;
 }
 .app-page.hidden {
     display: none;
@@ -223,6 +335,7 @@ body {
 /* Header Inventory */
 .inventory-header {
     padding: 30px 20px 10px 20px;
+    flex-shrink: 0 !important;
 }
 .inventory-header h2 {
     font-size: 24px;
@@ -239,6 +352,7 @@ body {
 .inventory-search {
     padding: 0 20px;
     margin-top: 15px;
+    flex-shrink: 0 !important;
 }
 .inventory-search input {
     width: 100%;
@@ -261,6 +375,7 @@ body {
     align-items: center;
     gap: 15px;
     cursor: pointer;
+    flex-shrink: 0 !important;
 }
 .scan-icon-inside {
     font-size: 24px;
@@ -596,3 +711,74 @@ body {
     border-radius: 2px;
 }
 
+/* --- 3. KENDALI SCROLL MANDIRI PER HALAMAN --- */
+
+/* PAGE HOME: Yang di-scroll bagian menu-grid dan statistik bawahnya */
+#page-home {
+    overflow-y: auto; /* Khusus home, karena isinya mengalir, biarkan mengalir tipis */
+}
+
+/* PAGE INVENTORY: Mengunci Header & Banner, hanya list barang yang scroll */
+.inventory-header, .inventory-search, .scan-banner {
+    flex-shrink: 0; /* Cegah header menyusut */
+}
+.products-list {
+    flex: 1;
+    overflow-y: auto; /* Hanya list barang ini yang scroll */
+}
+
+/* PAGE CART (TRANSACTIONS): Mengunci area scan atas, hanya list keranjang yang scroll */
+.scan-main-section, .scan-area-box, .welcome-banner {
+    flex-shrink: 0;
+}
+#cart-list-container {
+    flex: 1;
+    overflow-y: auto; /* Hanya daftar belanjaan di keranjang yang scroll */
+}
+
+/* PAGE BOOKKEEPING: Mengunci angka revenue, hanya area chart & detail yang bisa scroll jika penuh */
+#page-statis {
+    overflow-y: auto; 
+}
+
+/* PAGE PROFILE: Mengunci kartu nama atas, menu list bawah bisa di-scroll */
+.profile-header-card, .action-btn-row {
+    flex-shrink: 0;
+}
+.settings-list {
+    flex: 1;
+    overflow-y: auto; /* Hanya baris menu profile yang scroll */
+}
+
+/* --- 4. BONUS: Sembunyikan Scrollbar biar Bersih ala Aplikasi Pro --- */
+.products-list::-webkit-scrollbar,
+#cart-list-container::-webkit-scrollbar,
+.settings-list::-webkit-scrollbar,
+#page-home::-webkit-scrollbar,
+#page-statis::-webkit-scrollbar {
+    display: none;
+}
+
+.products-list, #cart-list-container, .settings-list, #page-home, #page-statis {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Beri jarak kanan-kiri khusus untuk konten di bawah banner */
+.search-container,
+.menu-grid,
+.stats-container,
+.scan-area-box,
+.scan-main-section,
+.revenue-grid,
+.stats-container-statis,
+.action-btn-row,
+.settings-list {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+
+/* Khusus untuk halaman Inventory yang ga pakai banner hijau, kasih padding penuh lagi */
+#page-list {
+    padding: 15px 15px 75px 15px !important;
+}
